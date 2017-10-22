@@ -26,8 +26,6 @@ public class CrimeListFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mCrimeAdapter;
 
-    private int mCrimePosition;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,7 +52,7 @@ public class CrimeListFragment extends Fragment {
             mCrimeAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mCrimeAdapter);
         } else {
-            mCrimeAdapter.notifyItemChanged(mCrimePosition);
+            mCrimeAdapter.notifyDataSetChanged();
         }
     }
 
@@ -70,8 +68,7 @@ public class CrimeListFragment extends Fragment {
             super(inflater.inflate(resource, container, false));
 
             itemView.setOnClickListener(v -> {
-                mCrimePosition = getAdapterPosition();
-                Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
+                Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
                 startActivity(intent);
             });
 
